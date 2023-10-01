@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class NumberGame extends  AbstractGame {
+public class NumberGame extends AbstractGame {
 
     @Override
     ArrayList<String> generateCharList() {
