@@ -1,3 +1,3 @@
 public enum GameStatus {
-    INIT,START,WIN,LOSE
+    INIT, START, WIN, LOSE, STOP
 }

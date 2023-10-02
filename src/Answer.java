@@ -12,10 +12,9 @@ public class Answer {
 
     @Override
     public String toString() {
-        return "Answer{" +
-                "bull=" + bull +
-                ", cow=" + cow +
-                ", maxTry=" + maxTry +
-                '}';
+        return "ПОДСКАЗКА: " +
+                "bull - " + bull +
+                " , cow - " + cow +
+                ", попыток осталось: " + maxTry;
     }
 }
