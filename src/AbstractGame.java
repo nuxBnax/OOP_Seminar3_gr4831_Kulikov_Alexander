@@ -13,6 +13,11 @@ public abstract class AbstractGame implements Game {
 
     abstract ArrayList<String> generateCharList();
 
+    /**
+     * start() - Функция инициализирует игру
+     * @param sizeWord - РАЗМЕР слова
+     * @param maxTry - КОЛИЧЕСТВО попыток
+     */
     @Override
     public void start(Integer sizeWord, Integer maxTry) {
         this.sizeWord = sizeWord;
@@ -20,7 +25,7 @@ public abstract class AbstractGame implements Game {
         computerWord = generateWord();
         gameStatus = GameStatus.START;
         history = new ArrayList<>();
-        System.out.println("computerWord = " + computerWord);
+        System.out.println("Загаданный компьютером набор символов - " + computerWord);
     }
 
     /**
@@ -39,6 +44,11 @@ public abstract class AbstractGame implements Game {
         return res;
     }
 
+    /**
+     * inputValue() - Функция принимает команды от пользователя из консоли и обрабатывает их
+     * @param value - Значение набранное пользователем (считывается из консоли).
+     * @return
+     */
     @Override
     public Answer inputValue(String value) {
         switch (value){
@@ -82,9 +92,14 @@ public abstract class AbstractGame implements Game {
                     gameStatus = GameStatus.LOSE;
                 }
                 return new Answer(bull, cow, maxTry);
+
         }
         return null;
     }
+
+    /**
+     * menu() - Функция вызывает меню позволяющее пользователю выбрать игру или выйти из нее
+     */
     public static void menu() {
 
         Scanner cs = new Scanner(System.in);
@@ -137,6 +152,9 @@ public abstract class AbstractGame implements Game {
         cs.close();
     }
 
+    /**
+     * playing() - Функция определяет статус игры и определяет ее дальнейший ход в зависимости от answer
+     */
     public static void playing(Integer sizeWord, Integer maxTry, Game game) {
         game.start(sizeWord,maxTry);
 
@@ -144,10 +162,22 @@ public abstract class AbstractGame implements Game {
                 game.getGameStatus() != GameStatus.STOP) {
             Scanner scanner = new Scanner(System.in);
             Answer answer = game.inputValue(scanner.nextLine());
-            System.out.println(answer + "\n" +
-                    "(ДОСТУПНЫЕ КОМАНДЫ: res - перезапуск игры, his - просмотр истории ходов, exit - выход из игры)");
+            if(answer!=null){
+                System.out.println(answer + "\n" +
+                        "(ДОСТУПНЫЕ КОМАНДЫ: res - перезапуск игры, his - просмотр истории ходов, exit - выход из игры)");
+            }
         }
         System.out.println("СТАТУС ИГРЫ: " + game.getGameStatus());
+        if(game.getGameStatus() == GameStatus.WIN || game.getGameStatus() == GameStatus.LOSE) {
+            Scanner sc= new Scanner(System.in);
+            System.out.println("Желаете сыграть еще? Наберите - yes");
+            String text = sc.nextLine();
+            if(text.equals("yes")){
+                menu();
+            } else {
+                System.out.println("Всего Доброго!");
+            }
+        }
     }
     @Override
     public GameStatus getGameStatus() {

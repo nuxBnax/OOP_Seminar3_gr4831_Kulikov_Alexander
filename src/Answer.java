@@ -3,7 +3,12 @@ public class Answer {
     int cow;
     int maxTry;
 
-
+    /**
+     *
+     * @param bull  БЫКИ - количество совпадений по позиции и символу
+     * @param cow  КОРОВЫ - количество совпадений по символу
+     * @param maxTry  КОЛИЧЕСТВО попыток
+     */
     public Answer(int bull, int cow,int maxTry) {
         this.bull = bull;
         this.cow = cow;
